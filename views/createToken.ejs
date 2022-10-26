@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/petite-vue?module'
+        createApp({
+            user: true,
+            studie: false,
+            signIn() {
+                console.log('signIn() called')
+            },
+            checkAbsents() {
+                alert('This could take a minute to complete')
+                fetch('/', {
+                    method: 'POST',
+                }).then(async (resp) => {
+                    const checkStudie = await resp.text()
+                    if(checkStudie === 'true') {
+                        this.studie = true
+                        const headerStudie = document.getElementById('headerStudie')
+                        headerStudie.innerHTML = '<h1 class="h1align" style="color: red;">Je hebt STUDIE</h1>'
+                    } else {
+                        this.studie = false
+                        const headerStudie = document.getElementById('headerStudie')
+                        headerStudie.innerHTML = '<h1 class="h1align" style="color: green">geen studie, sorry</h1>'
+                    }
+                })
+            }
+        }).mount()
+    </script>
+    <style>
+        body {
+            background-color: lightblue;
+        }
+
+        .btnCheckAbsent {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+        }
+        .h1align {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8cm;
+        }
+
+    </style>
+</head>
+
+<body v-scope>
+    <div name="Authenticate" v-if="!user">
+        <button class="btn btn-primary" @click="signIn">Sign in with GooGle</button>
+    </div>
+    <div name="Dashboard" v-if="user">
+        <div name="getContent">
+            <button class="btnCheckAbsent btn btn-secondary" @click="checkAbsents">Check if there are people
+                absent</button>
+        </div>
+    </div>
+    <div id="headerStudie">
+    </div>
+</body>
+
+</html>

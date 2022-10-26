@@ -1,0 +1,28 @@
+{
+  "name": "getabsentteachers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MattPlayGamez/getAbsentTeachers.git"
+  },
+  "author": "Mathys Penson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MattPlayGamez/getAbsentTeachers/issues"
+  },
+  "homepage": "https://github.com/MattPlayGamez/getAbsentTeachers#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "puppeteer": "^19.2.0"
+  }
+}
